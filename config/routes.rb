@@ -1,4 +1,7 @@
 Mikedalton::Application.routes.draw do
+  get "posts" => "posts#index"
+  get "posts/:slug" => "posts#show"
+
   get "home/index"
 
   # The priority is based upon order of creation:

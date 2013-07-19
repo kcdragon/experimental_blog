@@ -1,0 +1,27 @@
+class Post
+  include Mongoid::Document
+  include Mongoid::Timestamps
+
+  before_create :generate_slug
+
+  field :title, type: String
+  field :body, type: String
+  field :tags, type: Array, default: -> { [] }
+  field :slug, type: String
+
+  validates_presence_of :title
+  validates_presence_of :body
+
+  def to_param
+    self.slug
+  end
+
+private
+  def generate_slug
+    self.slug = slugify(self.title)
+  end
+
+  def slugify str
+    str.downcase.strip.gsub(/\s/, '-').squeeze('-')
+  end
+end
