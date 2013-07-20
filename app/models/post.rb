@@ -22,6 +22,6 @@ private
   end
 
   def slugify str
-    str.downcase.strip.gsub(/\s/, '-').squeeze('-')
+    str.downcase.strip.gsub(/[\W\s]/, '-').squeeze('-').chomp('-')
   end
 end

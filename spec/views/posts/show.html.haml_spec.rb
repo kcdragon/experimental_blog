@@ -5,7 +5,9 @@ describe "posts/show.html.haml" do
     assign(:post, stub_model(Post, {
                                title: 'foo',
                                body: 'bar',
-                               tags: 'baz'
+                               tags: 'baz',
+                               slug: 'foo',
+                               created_at: DateTime.now
                              }))
     render
   end
@@ -18,7 +20,13 @@ describe "posts/show.html.haml" do
     expect(rendered).to contain 'bar'
   end
 
-  it "displays post tags" do
+  it "displays post created at" do
+    expect(rendered).to contain DateTime.now.year.to_s
+    expect(rendered).to contain DateTime.now.month.to_s
+    expect(rendered).to contain DateTime.now.day.to_s
+  end
+
+  it "displays post created at" do
     expect(rendered).to contain 'baz'
   end
 end
