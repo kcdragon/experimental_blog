@@ -1,6 +1,6 @@
 Mikedalton::Application.routes.draw do
   resources :posts
-
+  get "about", to: "about#index", as: "about"
   get "home/index"
 
   # The priority is based upon order of creation:
