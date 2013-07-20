@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.13'
 
 gem 'mongoid', '~> 3.1.4'
+gem 'mongoid_taggable'
 
 gem 'haml', '~> 4.0.3'
 gem 'haml-rails'

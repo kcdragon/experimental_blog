@@ -5,7 +5,7 @@ describe "posts/show.html.haml" do
     assign(:post, stub_model(Post, {
                                title: 'foo',
                                body: 'bar',
-                               tags: ['baz']
+                               tags: 'baz'
                              }))
     render
   end

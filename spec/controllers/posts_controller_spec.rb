@@ -7,12 +7,12 @@ describe PostsController do
       [Post.create!(
                     title: 'title1',
                     body: 'body1',
-                    tags: ['tag1']
+                    tags: 'tag1'
                     ),
        Post.create!(
                     title: 'title2',
                     body: 'body2',
-                    tags: ['tag2']
+                    tags: 'tag2'
                     )]
     end
     before(:each) { get 'index' }
@@ -30,7 +30,7 @@ describe PostsController do
     let!(:post) { Post.create!(
                               title: 'title one',
                               body: 'body',
-                              tags: ['tag1']
+                              tags: 'tag1'
                               ) }
     before(:each) { get 'show', slug: post }
 

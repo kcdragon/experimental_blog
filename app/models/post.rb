@@ -1,12 +1,13 @@
 class Post
   include Mongoid::Document
+  include Mongoid::Taggable
   include Mongoid::Timestamps
 
   before_create :generate_slug
 
   field :title, type: String
   field :body, type: String
-  field :tags, type: Array, default: -> { [] }
+  #field :tags, type: Array, default: -> { [] }
   field :slug, type: String # TODO add date to slug
 
   validates_presence_of :title

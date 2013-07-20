@@ -36,8 +36,8 @@ describe Post do
   end
 
   describe '#tags' do
-    it 'defaults to empty array' do
-      expect(subject.tags).to eq []
+    it 'defaults to empty string' do
+      expect(subject.tags).to eq ''
     end
   end
 
