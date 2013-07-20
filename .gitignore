@@ -15,4 +15,5 @@
 /tmp
 *.rb~
 *.haml~
+*.scss~
 Gemfile~

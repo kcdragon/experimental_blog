@@ -1,6 +1,10 @@
 %section#posts
   - @posts.each do |post|
-    %section.post
-      %p= post.created_at
-      %p= link_to post.title, post_path(post)
-      %p= truncate post.body
+    %article.post
+      %h3.title= link_to post.title, post_path(post)
+      %p#subtitle
+        %span.timestamp= post.created_at
+      %p.content
+        = truncate post.body, length: 500
+        = link_to 'Read more...', post_path(post)
+      %p= post.tags_array.join(', ').chomp(', ')

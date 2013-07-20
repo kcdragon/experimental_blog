@@ -1,0 +1,20 @@
+ul#main-nav {
+    width: 100%;
+    float: right;
+    margin: 0 0 3em 0;
+    padding-left: 0;
+    list-style: none;
+
+    li.nav-item {
+	float: right;
+	margin-left: 1em;
+
+	a:link, a:visited, a:active {
+	    color: gray;
+	}
+
+	a:hover {
+	    color: black;
+	}
+    }
+}

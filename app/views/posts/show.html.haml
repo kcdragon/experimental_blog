@@ -1,9 +1,10 @@
-%h1= @post.title
-%p= @post.created_at
-%p= @post.body
-%p
-  Tags:
-  = @post.tags_array.join(',').chomp(',')
-%p
-  = link_to 'View All', posts_path
-  = link_to 'Edit', edit_post_path(@post)
+%article.post
+  %h2.title= @post.title
+  %span.timestamp= @post.created_at
+  %p= @post.body
+  %p
+    Tags:
+    = @post.tags_array.join(',').chomp(',')
+  %p
+    = link_to 'View All', posts_path
+    = link_to 'Edit', edit_post_path(@post)
