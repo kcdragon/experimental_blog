@@ -1,0 +1,17 @@
+- if @post.errors.any?
+  %ul
+    - @post.errors.full_messages.each do |message|
+      %li= message
+
+= form_for @post do |f|
+  %p
+    = f.label :title
+    = f.text_field :title
+  %p
+    = f.label :body
+    = f.text_area :body
+  %p
+    = f.label :tags
+    = f.text_field :tags
+  %p.button
+    = f.submit

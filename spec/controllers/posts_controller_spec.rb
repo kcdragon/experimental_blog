@@ -42,4 +42,28 @@ describe PostsController do
       expect(assigns(:post)).to eq post
     end
   end
+
+  describe "GET 'new'" do
+    before(:each) { get 'new' }
+
+    it "returns http success" do
+      expect(response).to be_success
+    end
+
+    it "assigns empty post" do
+      expect(assigns(:post)).to be_new_record
+    end
+  end
+
+  # describe "POST 'create'" do
+  #   before(:each) { post 'create' }
+
+  #   it "returns http success" do
+  #     expect(response).to be_success
+  #   end
+
+  #   it "assigns empty post" do
+  #     expect(assigns(:post)).to be_new_record
+  #   end
+  # end
 end

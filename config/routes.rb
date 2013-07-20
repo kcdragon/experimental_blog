@@ -1,4 +1,6 @@
 Mikedalton::Application.routes.draw do
+  get "posts/new" => "posts#new"
+  post "posts/create" => "posts#create"
   get "posts" => "posts#index"
   get "posts/:slug" => "posts#show"
 
