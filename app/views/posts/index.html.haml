@@ -1,3 +1,6 @@
-%h1 All Posts
-- @posts.each do |post|
-  %p= link_to post.title, post_path(post)
+%section#posts
+  - @posts.each do |post|
+    %section.post
+      %p= post.created_at
+      %p= link_to post.title, post_path(post)
+      %p= truncate post.body
