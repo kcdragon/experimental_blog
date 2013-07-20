@@ -20,4 +20,19 @@ class PostsController < ApplicationController
       render :edit
     end
   end
+
+  def edit
+    @post = Post.find_by(slug: params[:id])
+  end
+
+  def update
+    @post = Post.find_by(slug: params[:id])
+
+    respond_to do |format|
+      if @post.update_attributes(params[:post])
+        format.html { redirect_to @post }
+      else
+      end
+    end
+  end
 end
