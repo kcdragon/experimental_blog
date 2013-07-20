@@ -32,7 +32,7 @@ describe PostsController do
                               body: 'body',
                               tags: 'tag1'
                               ) }
-    before(:each) { get 'show', slug: post }
+    before(:each) { get 'show', id: post }
 
     it "returns http success" do
       expect(response).to be_success
@@ -55,15 +55,40 @@ describe PostsController do
     end
   end
 
-  # describe "POST 'create'" do
-  #   before(:each) { post 'create' }
+  describe "POST 'create'" do
+    let(:post_hash) do
+      { title: 'hello',
+        body: 'world',
+        tags: 'foo,bar' }
+    end
+    
+    context "when post is valid" do
+      before(:each) do
+        post 'create', post: post_hash
+      end
 
-  #   it "returns http success" do
-  #     expect(response).to be_success
-  #   end
+      it "redirects to show" do
+        expect(response).to redirect_to post_path(assigns(:post))
+      end
 
-  #   it "assigns empty post" do
-  #     expect(assigns(:post)).to be_new_record
-  #   end
-  # end
+      it "post is persisted" do
+        expect(assigns(:post)).to be_persisted
+      end
+    end
+
+    context "when post is not valid" do
+      before(:each) do
+        post_hash[:title] = ''
+        post 'create', post: post_hash
+      end
+
+      it "not persisted" do
+        expect(assigns(:post)).to_not be_persisted
+      end
+      
+      it "adds error" do
+        expect(assigns(:post).errors[:title].count).to eq 1
+      end
+    end
+  end
 end

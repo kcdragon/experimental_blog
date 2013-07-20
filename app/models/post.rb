@@ -7,7 +7,6 @@ class Post
 
   field :title, type: String
   field :body, type: String
-  #field :tags, type: Array, default: -> { [] }
   field :slug, type: String # TODO add date to slug
 
   validates_presence_of :title
