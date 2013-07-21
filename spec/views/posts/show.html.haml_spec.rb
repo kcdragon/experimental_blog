@@ -4,10 +4,10 @@ describe "posts/show.html.haml" do
   before(:each) do
     assign(:post, stub_model(Post, {
                                title: 'foo',
-                               body: 'bar',
+                               body_as_html: 'bar',
                                tags: 'baz',
                                slug: 'foo',
-                               created_at: DateTime.now
+                               date: DateTime.now
                              }))
     render
   end

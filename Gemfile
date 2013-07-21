@@ -8,8 +8,11 @@ gem 'mongoid', '~> 3.1.4'
 gem 'mongoid_taggable'
 
 gem 'haml', '~> 4.0.3'
-gem 'haml-rails'
-gem 'jquery-rails'
+gem 'haml-rails', '~> 0.4'
+gem 'jquery-rails', '~> 3.0.4'
+
+gem 'redcarpet', '~> 3.0.0'
+gem 'truncate_html', '~> 0.9.2'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -29,7 +32,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'database_cleaner'
+  gem 'database_cleaner', '~> 1.0.1'
 end
 
 # To use ActiveModel has_secure_password
@@ -43,5 +46,3 @@ end
 
 # Deploy with Capistrano
 # gem 'capistrano'
-
-gem 'debugger'

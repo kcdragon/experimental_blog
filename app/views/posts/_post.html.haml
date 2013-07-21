@@ -5,8 +5,9 @@
     %span.timestamp= post.date
     %p.content
       - if is_short
-        = truncate post.body, length: 500
+        -#= truncate(post.body_as_html, length: 500)
+        = truncate_html(post.body_as_html, length: 500)
         = link_to 'Read more...', post_path(post)
       - else
-        = post.body
+        = post.body_as_html
     %p= post.tags_array.join(', ').chomp(', ')
