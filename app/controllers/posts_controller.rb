@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = PostDecorator.decorate_collection(Post.desc(:created_at).page(params[:page]))
+    @posts = PostDecorator.decorate_collection(Post.desc(:created_at).page(params[:page]).per(5))
   end
 
   def show
@@ -14,10 +14,12 @@ class PostsController < ApplicationController
   def create
     @post = Post.create params[:post]
 
-    if @post.save
-      redirect_to post_path(@post)
-    else
-      render :edit
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to post_path(@post) }
+      else
+        format.html { render :edit }
+      end
     end
   end
 
@@ -32,6 +34,7 @@ class PostsController < ApplicationController
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post }
       else
+        format.html { render :edit }
       end
     end
   end
