@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = PostDecorator.decorate_collection(Post.all)
+    @posts = PostDecorator.decorate_collection(Post.desc(:created_at))
   end
 
   def show

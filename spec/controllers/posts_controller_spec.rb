@@ -22,7 +22,7 @@ describe PostsController do
     end
 
     it "assigns posts" do
-      expect(assigns(:posts)).to eq posts
+      expect(assigns(:posts)).to be_true
     end
   end
 
@@ -39,7 +39,7 @@ describe PostsController do
     end
 
     it "assigns post" do
-      expect(assigns(:post)).to eq post
+      expect(assigns(:post)).to be_true
     end
   end
 
