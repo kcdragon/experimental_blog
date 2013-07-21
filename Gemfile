@@ -11,6 +11,7 @@ gem 'haml', '~> 4.0.3'
 gem 'haml-rails', '~> 0.4'
 gem 'jquery-rails', '~> 3.0.4'
 
+gem 'kaminari', '~> 0.14.1'
 gem 'redcarpet', '~> 3.0.0'
 gem 'truncate_html', '~> 0.9.2'
 

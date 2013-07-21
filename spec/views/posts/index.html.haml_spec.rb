@@ -2,22 +2,24 @@ require 'spec_helper'
 
 describe "posts/index.html.haml" do
   before(:each) do
-    assign(:posts, [
-                    stub_model(Post, {
-                                 title: 'title one',
-                                 body_as_html: 'body one',
-                                 tags: 'foo,bar',
-                                 slug: 'title-one',
-                                 date: DateTime.now
-                               }),
-                    stub_model(Post, {
-                                 title: 'title two',
-                                 body_as_html: 'body two',
-                                 tags: 'bar,baz',
-                                 slug: 'title-two',
-                                 date: DateTime.now
-                               })
-                    ])
+    post1 = stub_model(Post, {
+                         title: 'title one',
+                         body_as_html: 'body one',
+                         tags: 'foo,bar',
+                         slug: 'title-one',
+                         date: DateTime.now
+                       })
+    post2 = stub_model(Post, {
+                         title: 'title two',
+                         body_as_html: 'body two',
+                         tags: 'bar,baz',
+                         slug: 'title-two',
+                         date: DateTime.now
+                       })
+    assign(:posts, Kaminari.paginate_array([
+                                            post1,
+                                            post2
+                                           ]).page(1))
     render
   end
 
