@@ -1,4 +1,3 @@
 %section#posts
-  = render partial: 'post', collection: @posts, locals: { is_short: true }
+  = render @posts, is_short: true
   = paginate @posts
-
