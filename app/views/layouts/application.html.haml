@@ -9,6 +9,9 @@
 
 %body
 #main
-  = render partial: 'layouts/navigation'
+  %header
+    = render partial: 'layouts/navigation'
   #content
     = yield
+  #footer
+    Placeholder for Footer

@@ -1,7 +1,7 @@
 - is_short ||= false
 %article.post
   %h3.title= link_to post.title, post_path(post)
-  %p#subtitle
+  %p.subtitle
     %span.timestamp= post.date
     %p.content
       - if is_short
