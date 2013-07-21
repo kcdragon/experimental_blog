@@ -1,11 +1,9 @@
-section#posts {
-    article.post {
-	margin-bottom: 25px;
+article.post {
+    margin-bottom: 25px;
 
-	.title {
-	    a:link, a:visited, a:active {
-		color: black;
-	    }
+    .title {
+	a, a:link, a:visited, a:active {
+	    color: black;
 	}
     }
 }

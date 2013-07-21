@@ -1,10 +1,10 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = PostDecorator.decorate_collection(Post.all)
   end
 
   def show
-    @post = Post.find_by(slug: params[:id])
+    @post = Post.find_by(slug: params[:id]).decorate
   end
 
   def new

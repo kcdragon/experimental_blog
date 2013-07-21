@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
 
+gem 'draper', '~> 1.0'
+
 gem 'mongoid', '~> 3.1.4'
 gem 'mongoid_taggable'
 

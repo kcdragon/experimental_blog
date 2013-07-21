@@ -12,3 +12,10 @@
 a {
     text-decoration: none !important;
 }
+a:link, a:visited, a:active {
+    color: gray;
+}
+
+a:hover {
+    color: black;
+}
