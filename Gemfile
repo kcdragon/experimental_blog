@@ -27,7 +27,7 @@ group :development, :test do
   gem 'rspec', '~> 2.14'
   gem 'rspec-rails', '~> 2.14'
   gem 'webrat', '~> 0.7.3'
-  gem 'forgery', '~> 0.5.0'
+  gem 'faker', '~> 1.1.2'
   gem 'debugger'
 end
 
