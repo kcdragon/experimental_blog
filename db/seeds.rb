@@ -24,9 +24,11 @@ if Rails.env.development?
       set << TAGS[rand(TAGS.length)]
       set
     end.to_a.join(',').chomp(',')
+    date = DateTime.random(year_range: 3)
+    date = date.change(year: date.year - 1)
     Post.create!(title: Faker::Lorem.words(rand(5) + 5).map(&:capitalize).join(" ").chomp(" "),
                  body: Faker::Lorem.paragraphs(rand(5) + 5).join("\n\n").chomp("\n\n"),
                  tags: tags,
-                 created_at: DateTime.random(year_range: 3))
+                 created_at: date)
   end
 end
