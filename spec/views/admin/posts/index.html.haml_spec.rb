@@ -28,6 +28,12 @@ describe "admin/posts/index.html.haml" do
     expect(rendered).to contain 'title two'
   end
 
+  it "displays post date" do
+    expect(rendered).to contain DateTime.now.year.to_s
+    expect(rendered).to contain DateTime.now.month.to_s
+    expect(rendered).to contain DateTime.now.day.to_s
+  end
+
   it "displays edit links" do
     expect(rendered).to have_selector :a, content: 'Edit'
   end
