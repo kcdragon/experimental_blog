@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "admin/index.html.haml" do
+describe "admin/posts/index.html.haml" do
   before(:each) do
     post1 = stub_model(Post, {
                          title: 'title one',

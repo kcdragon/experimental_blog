@@ -146,4 +146,18 @@ describe PostsController do
       end
     end
   end
+
+  # describe "DELETE 'destroy'" do
+  #   let(:post) do
+  #     Post.create!({ title: 'hello',
+  #                    body: 'world',
+  #                    tags: 'foo,bar'
+  #                  })
+  #     delete 'destroy', id: post.to_param
+  #   end
+
+  #   it "deletes post" do
+      
+  #   end
+  # end
 end
