@@ -12,7 +12,7 @@ class Admin::PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to admin_posts_path }
+        format.html { redirect_to admin_posts_path, notice: "'#{@post.title}' has been published." }
       else
         format.html { render :edit }
       end
@@ -28,10 +28,19 @@ class Admin::PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to admin_posts_path }
+        format.html { redirect_to admin_posts_path, notice: "'#{@post.title}' has been updated." }
       else
         format.html { render :edit }
       end
+    end
+  end
+
+  def destroy
+    post = Post.find_by(slug: params[:id])
+    post.destroy
+
+    respond_to do |format|
+      format.html { redirect_to admin_posts_path, notice: "'#{post.title}' has been removed." }
     end
   end
 end

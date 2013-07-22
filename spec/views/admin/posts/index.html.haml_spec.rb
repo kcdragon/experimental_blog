@@ -32,6 +32,10 @@ describe "admin/posts/index.html.haml" do
     expect(rendered).to have_selector :a, content: 'Edit'
   end
 
+  it "displays delete links" do
+    expect(rendered).to have_selector :a, content: 'Delete'
+  end
+
   it "displays new post link" do
     expect(rendered).to have_selector :a, content: 'New Post'
   end

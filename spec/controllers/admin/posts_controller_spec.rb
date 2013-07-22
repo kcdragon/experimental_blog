@@ -32,12 +32,16 @@ describe Admin::PostsController do
         post 'create', post: post_hash
       end
 
-      it "redirects to show" do
+      it "redirects to all posts" do
         expect(response).to redirect_to admin_posts_path
       end
 
       it "post is persisted" do
         expect(assigns(:post)).to be_persisted
+      end
+
+      it "flashes notice" do
+        expect(flash[:notice]).to_not be_empty
       end
     end
 
@@ -88,12 +92,16 @@ describe Admin::PostsController do
         put 'update', id: post.to_param, post: { title: 'hello 2', body: 'world 2', tags: 'foo,baz,bar' }
       end
 
-      it "redirects to show" do
+      it "redirects to all posts" do
         expect(response).to redirect_to admin_posts_path
       end
 
       it "post is persisted" do
         expect(assigns(:post)).to be_valid
+      end
+
+      it "flashes notice" do
+        expect(flash[:notice]).to_not be_empty
       end
     end
 
@@ -112,17 +120,25 @@ describe Admin::PostsController do
     end
   end
 
-  # describe "DELETE 'destroy'" do
-  #   let(:post) do
-  #     Post.create!({ title: 'hello',
-  #                    body: 'world',
-  #                    tags: 'foo,bar'
-  #                  })
-  #     delete 'destroy', id: post.to_param
-  #   end
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      post = Post.create!({ title: 'hello',
+                            body: 'world',
+                            tags: 'foo,bar'
+                          })
+      delete 'destroy', id: post.to_param
+    end
 
-  #   it "deletes post" do
-      
-  #   end
-  # end
+    it "redirects to all posts" do
+        expect(response).to redirect_to admin_posts_path
+      end
+
+    it "deletes post" do
+      expect(Post.where(title: 'hello')).to_not be_exists
+    end
+
+    it "flashes notice" do
+        expect(flash[:notice]).to_not be_empty
+      end
+  end
 end

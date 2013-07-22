@@ -11,6 +11,26 @@
     #content {
 	margin: 20px auto;
     }
+
+
+    #flash-section {
+	.flash {
+            margin: 15px 0;
+	    color: black;
+	    font-weight: bold;
+	    margin: 20px;
+	}
+    
+	.error {
+	    border: solid 4px #900;
+            background-color: #FF6565;
+	}
+	
+	.notice {
+	    border: solid 4px #26722D;
+            background-color: #A4E7A0;
+	}
+    }
 }
 
 a {

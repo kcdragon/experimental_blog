@@ -3,7 +3,7 @@ Mikedalton::Application.routes.draw do
 
   resources :posts, only: [:show, :index]
   namespace :admin do |admin|
-    resources :posts, except: [:show, :destroy]
+    resources :posts, except: [:show]
   end
 
   root :to => 'posts#index'

@@ -1,3 +1,4 @@
+= render 'shared/flash', flash: flash
 %section#posts
   = link_to 'New Post', new_admin_post_path
   %table
@@ -5,4 +6,5 @@
       %tr
         %td= post.title
         %td= link_to 'Edit', edit_admin_post_path(post)
+        %td= link_to 'Delete', admin_post_path(post), confirm: 'Are you sure?', method: :delete
   = paginate @posts
