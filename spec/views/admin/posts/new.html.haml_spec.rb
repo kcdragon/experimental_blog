@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require_relative 'form_shared_examples'
 
-describe "posts/new.html.haml" do
+describe "admin/posts/new.html.haml" do
   before(:each) do
     assign(:post, Post.new)
     render

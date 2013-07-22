@@ -3,7 +3,7 @@
     - @post.errors.full_messages.each do |message|
       %li= message
 
-= form_for @post do |f|
+= form_for [:admin, @post] do |f|
   %p
     = f.label :title
     = f.text_field :title

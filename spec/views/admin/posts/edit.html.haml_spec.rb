@@ -2,7 +2,7 @@ require 'spec_helper'
 
 require_relative 'form_shared_examples'
 
-describe "posts/edit.html.haml" do
+describe "admin/posts/edit.html.haml" do
   before(:each) do
     assign(:post, Post.create!({
                                title: 'title',

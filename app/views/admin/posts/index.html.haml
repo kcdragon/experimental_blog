@@ -1,8 +1,8 @@
 %section#posts
-  = link_to 'New Post', new_post_path
+  = link_to 'New Post', new_admin_post_path
   %table
     - @posts.each do |post|
       %tr
         %td= post.title
-        %td= link_to 'Edit', edit_post_path(post)
+        %td= link_to 'Edit', edit_admin_post_path(post)
   = paginate @posts

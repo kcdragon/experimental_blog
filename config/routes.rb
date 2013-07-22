@@ -1,12 +1,10 @@
 Mikedalton::Application.routes.draw do
   get "about", to: "about#index", as: "about"
 
-  resources :posts
+  resources :posts, only: [:show, :index]
   namespace :admin do |admin|
-    resources :posts, only: [:index]
+    resources :posts, except: [:show, :destroy]
   end
-  
-  #get "admin", to: "admin#index", as: "admin"
 
   root :to => 'posts#index'
 end
