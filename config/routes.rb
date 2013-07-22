@@ -1,4 +1,4 @@
-Mikedalton::Application.routes.draw do
+Blog::Application.routes.draw do
   get "about", to: "about#index", as: "about"
 
   resources :posts, only: [:show, :index]
