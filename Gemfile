@@ -25,25 +25,18 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'debugger'
+  gem 'faker', '~> 1.1.2'
   gem 'rspec', '~> 2.14'
   gem 'rspec-rails', '~> 2.14'
   gem 'webrat', '~> 0.7.3'
-  gem 'faker', '~> 1.1.2'
-  gem 'debugger'
+end
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
   gem 'database_cleaner', '~> 1.0.1'
 end
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
