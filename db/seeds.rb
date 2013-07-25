@@ -1,3 +1,5 @@
+Admin.create!(email: 'michaelcdalton@gmail.com', password: 'dragon2685', password_confirmation: 'dragon2685')
+
 if Rails.env.development?
 
   # see http://jroller.com/obie/entry/random_times_for_rails

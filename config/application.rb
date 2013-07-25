@@ -64,8 +64,13 @@ module Blog
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
+    # Recommended by Devise
+    config.assets.initialize_on_precompile = false
+
     config.mongoid.logger = Logger.new($stdout, :warn)
     #config.mongoid.persist_in_safe_mode = true
     config.mongoid.preload_models = false
+
+    
   end
 end

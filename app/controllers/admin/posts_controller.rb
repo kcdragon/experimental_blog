@@ -1,4 +1,6 @@
 class Admin::PostsController < ApplicationController
+  before_filter :authenticate_admin!
+
   def index
     @posts = PostDecorator.decorate_collection(Post.desc(:created_at).page(params[:page]).per(20))
   end

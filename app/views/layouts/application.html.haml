@@ -12,6 +12,10 @@
   %header
     = render 'layouts/navigation'
   #content
+    %section#flash-section
+      - [:notice, :error, :success, :alert].each do |key|
+        - unless flash[key].blank?
+          %p{ :class => "flash #{key}" }= flash[key]
     = yield
   #footer
     = render 'layouts/footer'

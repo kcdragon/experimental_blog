@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Admin::PostsController do
+  before(:each) do
+    admin = Admin.create!(email: 'test@test.com',
+                          password: '12345678',
+                          password_confirmation: '12345678')
+    sign_in admin
+  end
+
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
