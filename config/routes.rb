@@ -1,5 +1,5 @@
 Blog::Application.routes.draw do
-  devise_for :admins
+  devise_for :admin, :path => '', :path_names => { :sign_in => "admin/sign_in", :sign_out => "admin/sign_out" }
 
   get "about", to: "about#index", as: "about"
 
