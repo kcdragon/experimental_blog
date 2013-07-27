@@ -6,6 +6,20 @@ describe Post do
   it { respond_to :body }
   it { respond_to :tags }
   it { respond_to :slug }
+
+  describe 'queries' do
+    describe '.years' do
+      before(:each) do
+        [2013, 2013, 2012].each_with_index do |year, i|
+          Post.create!(title: "t#{i}", body: "b#{i}", created_at: DateTime.new(year))
+        end
+      end
+
+      specify do
+        expect(Post.years).to match_array [2013, 2012]
+      end
+    end
+  end
   
   let(:post) { Post.new(title: 'Hello World',
                         body: 'body') }

@@ -1,3 +1,5 @@
+= render 'filter', years: @years
+
 %section#posts
   = render @posts, is_short: true
   = paginate @posts
