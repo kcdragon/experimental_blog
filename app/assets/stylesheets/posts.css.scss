@@ -7,3 +7,19 @@ article.post {
 	}
     }
 }
+
+section.rside {
+    float: right;
+    width: 150px;
+
+    ol.filter {
+	margin-top: 0px;
+	padding-top: 0px;
+	padding-left: 10px;
+	list-style: none;
+    }
+}
+
+section.posts {
+    margin-right: 200px;
+}
