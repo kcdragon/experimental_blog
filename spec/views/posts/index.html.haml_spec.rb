@@ -26,7 +26,6 @@ describe "posts/index.html.haml" do
                                             post1,
                                             post2
                                            ]).page(1))
-    assign(:years, [2013, 2012])
     render
   end
 
@@ -34,6 +33,4 @@ describe "posts/index.html.haml" do
     expect(rendered).to contain 'title one'
     expect(rendered).to contain 'title two'
   end
-
-  it_should_behave_like 'page with filter'
 end

@@ -16,6 +16,6 @@
       - [:notice, :error, :success, :alert].each do |key|
         - unless flash[key].blank?
           %p{ :class => "flash #{key}" }= flash[key]
-    = yield
+    = content_for?(:content) ? yield(:content) : yield
   #footer
     = render 'layouts/footer'

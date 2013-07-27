@@ -6,6 +6,8 @@
 /doc
 /tmp
 *.rb~
+*.rb#
+*#*.rb
 *.haml~
 *.scss~
 Gemfile~

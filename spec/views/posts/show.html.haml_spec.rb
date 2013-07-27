@@ -9,7 +9,7 @@ describe "posts/show.html.haml" do
                                slug: 'foo',
                                date: DateTime.now
                              }))
-    assign(:years, [2013, 2012])
+    #assign(:years, [2013, 2012])
     render
   end
 
@@ -30,6 +30,4 @@ describe "posts/show.html.haml" do
   it "displays post created at" do
     expect(rendered).to contain 'baz'
   end
-
-  it_should_behave_like 'page with filter'
 end
