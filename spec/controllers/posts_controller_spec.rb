@@ -6,25 +6,25 @@ describe PostsController do
     [Post.create!(
                   title: 'title1',
                   body: 'body1',
-                  tags: 'tag1',
+                  tags: 'one',
                   created_at: DateTime.new(2013, 7, 31)
                   ),
      Post.create!(
                   title: 'title2',
                   body: 'body2',
-                  tags: 'tag2',
+                  tags: 'one,two',
                   created_at: DateTime.new(2013, 7, 1)
                   ),
      Post.create!(
                   title: 'title3',
                   body: 'body3',
-                  tags: 'tag3',
+                  tags: 'one,three',
                   created_at: DateTime.new(2013, 6, 1)
                   ),
      Post.create!(
                   title: 'title4',
                   body: 'body4',
-                  tags: 'tag4',
+                  tags: 'two,three',
                   created_at: DateTime.new(2012, 7, 1))]
   end
   
@@ -66,6 +66,30 @@ describe PostsController do
       
       it "assigns posts" do
         expect(assigns(:posts).count).to eq 2
+      end
+    end
+
+    context 'only posts with the selected tag' do
+      before(:each) { get 'index', tags: 'one' }
+
+      it "returns http success" do
+        expect(response).to be_success
+      end
+      
+      it "assigns posts" do
+        expect(assigns(:posts).count).to eq 3
+      end
+    end
+
+    context 'only posts with the selected tags' do
+      before(:each) { get 'index', tags: 'two,three' }
+
+      it "returns http success" do
+        expect(response).to be_success
+      end
+      
+      it "assigns posts" do
+        expect(assigns(:posts).count).to eq 1
       end
     end
 

@@ -33,4 +33,10 @@ describe "posts/index.html.haml" do
     expect(rendered).to contain 'title one'
     expect(rendered).to contain 'title two'
   end
+
+  it 'displays links to tags' do
+    expect(rendered).to have_selector 'a', content: 'foo'
+    expect(rendered).to have_selector 'a', content: 'bar'
+    expect(rendered).to have_selector 'a', content: 'baz'
+  end
 end

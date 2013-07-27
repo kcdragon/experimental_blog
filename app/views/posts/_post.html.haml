@@ -8,4 +8,6 @@
         = truncate_html(post.body_as_html, length: 500, omission: link_to('...read more', post_path(post)).chomp)
       - else
         = post.body_as_html
-    %p= post.tags_array.join(', ').chomp(', ')
+    %p
+      - post.tags_array.each do |tag|
+        = link_to(tag, posts_path(tags: tag))

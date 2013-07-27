@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
   def index
-    if params[:year]
-      posts = Post.all_in_year params[:year], params[:month]
+    if year
+      posts = Post.all_in_year year, month
     else
       posts = Post.all
+    end
+
+    if tags
+      posts = posts.tagged_with_all tags
     end
 
     @years = Post.years.reverse
@@ -21,5 +25,19 @@ private
   end
 
   def paginate posts
+  end
+
+  def year
+    params[:year] || session[:year] || nil
+  end
+
+  def month
+    params[:month] || session[:month] || nil
+  end
+
+  def tags
+    return unless params[:tags] || session[:tags]
+    tags = params[:tags].split(',') rescue []
+    tags | (session[:tags] || [])
   end
 end
