@@ -43,6 +43,10 @@ describe PostsController do
       it "assigns years" do
         expect(assigns(:years)).to match_array [2013, 2012]
       end
+
+      it 'assigns tags' do
+        expect(assigns(:tags)).to match_array ['one', 'two', 'three']
+      end
     end
 
     context 'only posts in given year' do

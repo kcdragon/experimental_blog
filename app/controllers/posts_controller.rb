@@ -10,11 +10,13 @@ class PostsController < ApplicationController
       posts = posts.tagged_with_all tags
     end
 
+    @tags = Post.tags
     @years = Post.years.reverse
     @posts = decorate(posts.desc(:created_at).page(params[:page]).per(5))
   end
 
   def show
+    @tags = Post.tags
     @years = Post.years.reverse
     @post = Post.find_by(slug: params[:id]).decorate
   end
