@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'layouts/posts.html.haml' do
-  let(:tags) { ['foo', 'bar', 'baz'] }
+  let(:tags) { [['foo', 3], ['bar',2], ['baz',2]] }
   let(:years) { ['2013', '2012'] }
 
   before(:each) do
@@ -19,7 +19,9 @@ describe 'layouts/posts.html.haml' do
 
   it 'displays tags' do
     tags.each do |tag|
-      rendered.should have_selector('a', content: tag)
+      rendered.should have_selector('a') do |link|
+        link.should contain(/#{tag}.*\d+.*/)
+      end
     end
   end
 end

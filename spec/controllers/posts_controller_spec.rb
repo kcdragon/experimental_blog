@@ -27,6 +27,16 @@ describe PostsController do
                   tags: 'two,three',
                   created_at: DateTime.new(2012, 7, 1))]
   end
+
+  shared_examples_for 'filter' do
+    it "assigns years" do
+      expect(assigns(:years)).to match_array [2013, 2012]
+    end
+
+    it 'assigns tags' do
+      expect(assigns(:tags)).to match_array [['one', 3], ['two', 2], ['three', 2]]
+    end
+  end
   
   describe "GET 'index'" do
     context 'all posts' do
@@ -40,13 +50,7 @@ describe PostsController do
         expect(assigns(:posts).count).to eq posts.count
       end
 
-      it "assigns years" do
-        expect(assigns(:years)).to match_array [2013, 2012]
-      end
-
-      it 'assigns tags' do
-        expect(assigns(:tags)).to match_array ['one', 'two', 'three']
-      end
+      it_behaves_like 'filter'
     end
 
     context 'only posts in given year' do
@@ -102,23 +106,16 @@ describe PostsController do
   end
 
   describe "GET 'show'" do
-    let!(:post) { Post.create!(
-                              title: 'title one',
-                              body: 'body',
-                              tags: 'tag1'
-                              ) }
-    before(:each) { get 'show', id: post }
+    before(:each) { get 'show', id: posts.first }
 
     it "returns http success" do
       expect(response).to be_success
     end
 
     it "assigns post" do
-      expect(assigns(:post)).to eq post
+      expect(assigns(:post)).to eq posts.first
     end
 
-    it "assigns years" do
-      expect(assigns(:years)).to match_array [2013, 2012]
-    end
+    it_behaves_like 'filter'
   end
 end
