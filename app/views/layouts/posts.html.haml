@@ -2,13 +2,13 @@
   %section.rside
     .filterTitle By Year
     %ol.filter
-      %li= link_to 'All', posts_path
+      %li= link_to 'All', posts_path, remote: true
       - @years.each do |year|
-        %li= link_to year, posts_path(year: year)
+        %li= link_to year, posts_path(year: year), remote: true
 
     .filterTitle By Tags
     %ol.filter
-      %li= link_to 'All', posts_path
+      %li= link_to 'All', posts_path, remote: true
       - @tags.each do |tag|
         %li= link_to tag[0] + " (#{tag[1].to_i})", posts_path(tags: tag[0]), remote: true
 
