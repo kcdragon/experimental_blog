@@ -2,18 +2,23 @@ class PostsController < ApplicationController
   before_filter :set_available_facets
 
   def index
+    session[:year] = nil if params[:clear_year]
+
     if year
       posts = Post.all_in_year year, month
-
       session[:year] = year
     else
       posts = Post.all
     end
 
-    @selected_tags = update_tags
-    if @selected_tags
-      session[:tags] = @selected_tags
-      posts = posts.tagged_with_all @selected_tags
+    if params[:clear_tags]
+      session[:tags] = nil
+    else
+      @selected_tags = update_tags
+      if @selected_tags
+        session[:tags] = @selected_tags
+        posts = posts.tagged_with_all @selected_tags
+      end
     end
 
     @posts = decorate(posts.desc(:created_at).page(params[:page]).per(5))

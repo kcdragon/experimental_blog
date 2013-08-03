@@ -4,3 +4,9 @@ shared_examples_for 'page with filter' do
     rendered.should have_selector('a', content: '2012')
   end
 end
+
+shared_examples_for 'http request' do
+  it "returns http success" do
+    expect(response).to be_success
+  end
+end

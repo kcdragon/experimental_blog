@@ -39,37 +39,32 @@ describe PostsController do
   end
 
   shared_examples_for 'result of 1 post' do
-    it "returns http success" do
-      expect(response).to be_success
-    end
+    it_behaves_like 'http request'
 
     it "assigns posts" do
       expect(assigns(:posts).count).to eq 1
+    end
+  end
+
+  shared_examples_for 'all posts displayed' do
+    it "assigns posts" do
+      expect(assigns(:posts).count).to eq posts.count
     end
   end
   
   describe "GET 'index'" do
     context 'all posts' do
       before(:each) { get 'index' }
-
-      it "returns http success" do
-        expect(response).to be_success
-      end
-
-      it "assigns posts" do
-        expect(assigns(:posts).count).to eq posts.count
-      end
-
+      it_behaves_like 'http request'
+      it_behaves_like 'all posts displayed'
       it_behaves_like 'filter'
     end
 
     context 'only posts in given year' do
       before(:each) { get 'index', year: '2013' }
 
-      it "returns http success" do
-        expect(response).to be_success
-      end
-      
+      it_behaves_like 'http request'
+
       it "assigns posts" do
         expect(assigns(:posts).count).to eq 3
       end
@@ -78,9 +73,7 @@ describe PostsController do
     context 'only posts in given year and month' do
       before(:each) { get 'index', year: '2013', month: '7' }
 
-      it "returns http success" do
-        expect(response).to be_success
-      end
+      it_behaves_like 'http request'
       
       it "assigns posts" do
         expect(assigns(:posts).count).to eq 2
@@ -90,9 +83,7 @@ describe PostsController do
     context 'only posts with the selected tag' do
       before(:each) { get 'index', tags: 'one' }
 
-      it "returns http success" do
-        expect(response).to be_success
-      end
+      it_behaves_like 'http request'
       
       it "assigns posts" do
         expect(assigns(:posts).count).to eq 3
@@ -139,6 +130,26 @@ describe PostsController do
       end
 
       it_behaves_like 'result of 1 post'
+    end
+
+    context 'clear selected tags' do
+      before(:each) do
+        session[:tags] = ['two', 'three']
+        get 'index', clear_tags: true
+      end
+      it_behaves_like 'http request'
+      it_behaves_like 'all posts displayed'
+      it_behaves_like 'filter'
+    end
+
+    context 'clear year selection' do
+      before(:each) do
+        session[:year] = '2013'
+        get 'index', clear_year: true
+      end
+      it_behaves_like 'http request'
+      it_behaves_like 'all posts displayed'
+      it_behaves_like 'filter'
     end
 
     it "paginates posts"
