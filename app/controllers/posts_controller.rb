@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_filter :set_available_facets
 
   def index
     session[:year] = nil if params[:clear_year]
@@ -14,23 +13,54 @@ class PostsController < ApplicationController
     if params[:clear_tags]
       session[:tags] = nil
     else
-      @selected_tags = update_tags
-      if @selected_tags
-        session[:tags] = @selected_tags
-        posts = posts.tagged_with_all @selected_tags
+      @selected_tags = selected_tags
+      if selected_tags
+        session[:tags] = selected_tags
+        posts = posts.tagged_with_all selected_tags
       end
     end
+
+    set_available_facets
 
     @posts = decorate(posts.desc(:created_at).page(params[:page]).per(5))
   end
 
   def show
+    set_available_facets
     @post = Post.find_by(slug: params[:id]).decorate
   end
 
 private
   def set_available_facets
-    @tags = Post.tags_with_weight
+    #@tags = Post.tags_with_weight
+    map = %Q{
+      function() {
+        this.tags_array.forEach(function(tag) {
+          emit(tag, { 'count': 1 });
+        });
+      }
+    }
+
+    reduce = %Q{
+      function(tag, values) {
+        var result = { 'count': 0 };
+        values.forEach(function(value) {
+          result.count += value.count;
+        });
+        return result;
+      }
+    }
+
+    # tags_with_weight only works with Post.all, not a sub-selection
+    
+    @tags = Post.tagged_with_all(selected_tags).map_reduce(map, reduce).out(inline: true).map do |result|
+      [result['_id'], result['value']['count']]
+    end
+    
+    @tags = @tags.select do |result|
+      !selected_tags.include?(result[0])
+    end if selected_tags
+
     @years = Post.years.reverse
   end
 
@@ -49,8 +79,12 @@ private
     params[:month] || session[:month] || nil
   end
 
-  def update_tags
+  def selected_tags
     return unless session[:tags] || params[:tags]
+    @selected_tags ||= retrieve_tags
+  end
+
+  def retrieve_tags
     tags = session[:tags] || []
     (tags << params[:tags].split(',')).flatten! if params[:tags]
     tags

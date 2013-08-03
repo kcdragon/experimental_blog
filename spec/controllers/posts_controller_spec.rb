@@ -105,15 +105,6 @@ describe PostsController do
       it_behaves_like 'result of 1 post'
     end
 
-    context 'tags selected in consecutive requests' do
-      before(:each) do
-        get 'index', tags: 'two'
-        get 'index', tags: 'three'
-      end
-
-      it_behaves_like 'result of 1 post'
-    end
-
     context 'year selected followed by tag' do
       before(:each) do
         get 'index', year: '2013'
@@ -150,6 +141,32 @@ describe PostsController do
       it_behaves_like 'http request'
       it_behaves_like 'all posts displayed'
       it_behaves_like 'filter'
+    end
+
+    context 'when year is cleared, selected tags remain' do
+      before(:each) do
+        session[:tags] = ['two']
+        session[:year] = '2013'
+        get 'index', clear_year: true
+      end
+
+      it_behaves_like 'http request'
+
+      it 'displays two posts' do
+        expect(assigns(:posts).count).to eq 2
+      end
+
+      it 'year is empty' do
+        expect(assigns(:year)).to be_nil
+      end
+
+      it 'tags is "one" and "three"' do
+        expect(assigns(:tags)).to match_array [['one', 1], ['three', 1]]
+      end
+
+      it 'selected tags is "two"' do
+        expect(assigns(:selected_tags)).to match_array ['two']
+      end
     end
 
     it "paginates posts"
