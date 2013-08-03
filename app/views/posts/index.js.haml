@@ -1,1 +1,2 @@
 $('#posts').html("#{escape_javascript(render 'posts/all', posts: @posts )}");
+$('#rside').html("#{escape_javascript(render 'posts/filters', years: @years, tags: @tags, selected_tags: @selected_tags )}");

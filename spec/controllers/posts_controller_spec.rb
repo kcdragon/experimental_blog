@@ -37,6 +37,16 @@ describe PostsController do
       expect(assigns(:tags)).to match_array [['one', 3], ['two', 2], ['three', 2]]
     end
   end
+
+  shared_examples_for 'result of 1 post' do
+    it "returns http success" do
+      expect(response).to be_success
+    end
+
+    it "assigns posts" do
+      expect(assigns(:posts).count).to eq 1
+    end
+  end
   
   describe "GET 'index'" do
     context 'all posts' do
@@ -92,13 +102,43 @@ describe PostsController do
     context 'only posts with the selected tags' do
       before(:each) { get 'index', tags: 'two,three' }
 
-      it "returns http success" do
-        expect(response).to be_success
+      it_behaves_like 'result of 1 post'
+    end
+
+    context 'posts with tag in param and tag in session' do
+      before(:each) do
+        session[:tags] = ['two']
+        get 'index', tags: 'three'
       end
-      
-      it "assigns posts" do
-        expect(assigns(:posts).count).to eq 1
+
+      it_behaves_like 'result of 1 post'
+    end
+
+    context 'tags selected in consecutive requests' do
+      before(:each) do
+        get 'index', tags: 'two'
+        get 'index', tags: 'three'
       end
+
+      it_behaves_like 'result of 1 post'
+    end
+
+    context 'year selected followed by tag' do
+      before(:each) do
+        get 'index', year: '2013'
+        get 'index', tags: 'two'
+      end
+
+      it_behaves_like 'result of 1 post'
+    end
+
+    context 'tag selected followed by year' do
+      before(:each) do
+        get 'index', tags: 'two'
+        get 'index', year: '2013'
+      end
+
+      it_behaves_like 'result of 1 post'
     end
 
     it "paginates posts"
