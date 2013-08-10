@@ -15,4 +15,6 @@
     .filterTitle Selected Tags
     %ol.filter
       - selected_tags.each do |tag|
-        %li= link_to tag, posts_tags_path(tag: tag), method: :delete, remote: true
+        %li
+          = tag
+          = link_to 'x', posts_tags_path(tag: tag), method: :delete, remote: true
