@@ -3,29 +3,12 @@ require 'spec_helper'
 describe PostsController do
 
   let!(:posts) do
-    [Post.create!(
-                  title: 'title1',
-                  body: 'body1',
-                  tags: 'one',
-                  created_at: DateTime.new(2013, 7, 31)
-                  ),
-     Post.create!(
-                  title: 'title2',
-                  body: 'body2',
-                  tags: 'one,two',
-                  created_at: DateTime.new(2013, 7, 1)
-                  ),
-     Post.create!(
-                  title: 'title3',
-                  body: 'body3',
-                  tags: 'one,three',
-                  created_at: DateTime.new(2013, 6, 1)
-                  ),
-     Post.create!(
-                  title: 'title4',
-                  body: 'body4',
-                  tags: 'two,three',
-                  created_at: DateTime.new(2012, 7, 1))]
+    [
+     FactoryGirl.create(:post_one),
+     FactoryGirl.create(:post_two),
+     FactoryGirl.create(:post_three),
+     FactoryGirl.create(:post_four)
+    ]
   end
 
   shared_examples_for 'filter' do
