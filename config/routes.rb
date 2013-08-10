@@ -4,6 +4,12 @@ Blog::Application.routes.draw do
   get "about", to: "about#index", as: "about"
 
   resources :posts, only: [:show, :index]
+
+  namespace :posts do
+    #resource :tags, only: [:destroy]
+    delete 'tags', to: 'tags#destroy'
+  end
+
   namespace :admin do |admin|
     resources :posts, except: [:show]
   end

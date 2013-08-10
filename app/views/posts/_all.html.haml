@@ -1,3 +1,3 @@
 %p= paginate posts, remote: true
-= render posts, is_short: true
+= render partial: 'posts/post', collection: posts, locals: { is_short: true }
 %p= paginate posts, remote: true
